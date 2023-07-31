@@ -1,3 +1,445 @@
+9.2.2 (05/31/2023)
+------------------
+
+* Updated flash target externs for Haxe 4.3 compatibility
+* Resolve new `@:enum abstract` warnings for Haxe 4.3 by replacing with `enum abstract`, if current Haxe version supports it
+* Fixed `TextField` keyboard shortcut support to account for AltGr key
+* Fixed double timer in `TextField` that would cause caret to keep blinking on focus out
+* Fixed exception in `TextField` rendered by Cairo when the text contains ligatures
+* Fixed `null` exception in `FileReference.browse()` when no files are selected on html5 target
+* Fixed incorrect `accept` attribute on html5 input element if type filter is used once, but not second time
+* Fixed `Context3D` scissor rectangle (again), with better fix for both classic display list and Stage 3D
+* Fixed text for AM and PM returned by `DateTimeFormatter` on html5 target
+* Fixed default locale on html5 for `DateTimeFormatter` and `LocaleID`
+* Fixed drawing display object with `visible == false` to `BitmapData`, which should have made it temporarily visible
+* Fixed default fallback `QName.uri` value to match flash target
+* Fixed bounds calculation of `Graphics.cubicCurveTo()`
+* Fixed "Select error 22" exception when creating many `Socket` objects at once
+* Fixed uncaught exception when creating a `Socket`
+* Fixed invalid `null` value passed to `Vector` constructor on flash target
+* Fixed possible incorrect detection of current stage on `TextField` mouse up
+* Fixed `Transform.matrix3D` setter vertical scale value
+* Fixed default `blendMode` used by `ShaderFilter`
+* Fixed setting `topExtension`, `rightExtension`, `bottomExtension`, and `leftExtension` in `ShaderFilter`
+* Fixed compilation of `RenderEvent` for flash target
+* Fixed issue where setting `width` and `height` of `Video` was sometimes ignored
+* Fixed missing `System.totalMemory` and `System.gc()` on HashLink
+* Fixed `Graphics.lineGradientStyle()` to allow `null` values for `alphas` and `ratios` parameters, similar to `beginGradientFill()`
+* Fixed default fallback value for `ratios` parameter in `Graphics.lineGradientStyle()` and `beginGradientFill()`
+* Fixed `Graphics` (and text) jitter on HiDPI screens when using hardware acceleration by snapping to nearest device pixel instead of nearest stage pixel
+* Added missing parameters to `Context3D.drawToBitmapData()` in flash target externs
+* Added new `openfl_disable_graphics_pixel_snapping` define to optionally disable pixel snapping on `Graphics` tx/ty transformation
+* Translate environment variables that appear in `File` path on Windows
+* When using flash target with Haxe 4.3, Lime 8.0.2 is required
+
+9.2.1 (02/21/2023)
+------------------
+
+* Improved shader debug logging on html5 target
+* Fixed `Socket` error handling missing some exceptions
+* Fixed `Context3D` scissor rectangle when scaling for HiDPI screens
+* Fixed ignored user input after changing `TextField.type` to `INPUT` when it already has focus
+* Fixed `TextField` exception when calculating `scrollV`
+* Fixed double constructor in SWF library
+* Fixed rendering of `StaticText` when using `-Dcairo`
+* Fixed `scrollRect` changes not affecting display objects with `cacheAsBitmap` or `filters`
+* Fixed exception in `Font.fromFile` when path is null
+* Fixed generation of temp file path to avoid using one that already exist
+* Fixed null exception in `FileStream` when calling `close()` on already closed stream
+* Fixed `OutputProgressEvent` on flash/air targets
+* Temporarily limited length of `File` dialog filter types to one until Lime allows more than one
+
+9.2.0 (08/30/2022)
+------------------
+
+* Added `openfl.text.StyleSheet` implementation for `TextField`
+* Added `scaleMode` implementation to `Stage`
+* Added automatic scaling on HiDPI screens when `window.allow-high-dpi` enabled in project (use `-Dopenfl-disable-hdpi` to restore old behavior)
+* Added `File`, `FileStream`, and `FileMode` in the `openfl.filesystem` package to read and write files on native platforms
+* Added `openfl.desktop.NativeProcess` to run executables on native platforms
+* Added `openfl.display.ChildAccess` abstract to simplify access to nested display objects
+* Added `openfl.net.IDynamicPropertyOutput` and `openfl.net.IDynamicPropertyWriter` interfaces
+* Added `openfl.net.Responder`, `openfl.utils.Namespace`, and `openfl.utils.QName` classes
+* Added `isXMLName`, `registerClassAlias`, and `getClassByAlias` static methods to `openfl.Lib`
+* Added `condenseWhite` property to `TextField` for `htmlText` whitespace removal
+* Added `openfl.globalization.DateTimeFormatter` implementation for HTML5 and Flash (defaults to en_US on native platforms)
+* Added `some` and `every` methods to `Vector`
+* Added session cookie management for `URLLoader` on native platforms
+* Added Stage 3D to the DOM renderer on HTML5
+* Added optional text measurement with DIV on HTML5 (use `-Dopenfl-measuretext-div`)
+* Added `fromBundle` static method to `openfl.utils.AssetLibrary`
+* Improved `TextField` DOM rendering and measurement on HTML5
+* Improved `Font.enumerateFonts` to return device fonts, if specified
+* Improved visibility of focused `TextField` on mobile by specifying its global rectangle
+* Improved `restrict` parsing in `TextField` when it contains multiple `^` characters
+* Improved `<li>` element rendering in `TextField` by adding line breaks and displaying bullets
+* Improved `htmlText` parsing in `TextField` for HTML entity character codes like `&#38;` and `&#x20AC;`
+* Improved positioning of underline in `TextField`
+* Improved `URLVariables` syntax compatibility with Flash by adding `@:arrayAccess`
+* Improved implementation of `openfl.utils.Object`
+* Improved output file size when Lime sets *disable_preloader_assets*
+* Improved `getMusic` method on `Assets` to allow streaming Vorbis files on native platforms
+* Improved FLA library support by allowing `Sprite` to be used as linkage base class
+* Fixed rendering of UTF-8 characters on macOS
+* Fixed the last line in a `TextField` getting cut off sometimes when auto-sized
+* Fixed inconsistent letter spacing in `TextField`
+* Fixed missing bold and italic variants in `TextField` on native platforms
+* Fixed missing `Event.OPEN` dispatch in `Loader` and `URLLoader`
+* Fixed missing bubbling of `TextEvent.LINK`
+* Fixed signature of `splice` method on `Vector`
+* Fixed missing dispatch of `FocusEvent.MOUSE_FOCUS_CHANGE` in some situations
+* Fixed rendering of `openfl.text.StaticText`
+
+9.1.0 (04/10/2021)
+------------------
+
+* Updated for Haxe 4.2
+* Added `openfl.net.ServerSocket` for TCP sockets on native platforms
+* Added `openfl.net.DatagramSocket` for UDP sockets on native platforms
+* Added `openfl.utils.ObjectPool`
+* Added shape caching to improve `TextField` rendering performance
+* Migrated OpenFL sources to a simpler package structure for better tooling compatibility
+* Improved `Loader` to prevent use of `addChild`/`removeChild` methods
+* Improved dynamic field access on `openfl.utils.Object` references
+* Improved handling of new lines and line breaks in `TextField`
+* Improved handling of layout calculations in `TextField`
+* Improved the rendering of selected text in `TextField`
+* Improved the performance when using nested `TileContainer` instances with `Tilemap`
+* Fixed an issue where `graphics.lineStyle` could cause an additoinal draw
+* Fixed a rounding issue that could clip `graphics` rendering by one pixel
+* Fixed `sprite.transform.colorTransform` to return a new `ColorTransform` object
+* Fixed issues rendering some `bitmap.scrollRect` objects on the HTML5 canvas renderer
+* Fixed issues rendering some gradient fills on HTML5 canvas renderer
+* Fixed an incorrect reference when dispatching some `MouseEvent.ROLL_OUT` events
+* Fixed renderer remaining active on `Tilemap` that includes no tiles
+
+
+9.0.2 (08/17/2020)
+------------------
+
+* Fixed a regression when targeting Flash
+
+
+9.0.1 (08/17/2020)
+------------------
+
+* Fixed paths for internal packages for case-sensitivity
+
+
+9.0.0 (08/14/2020)
+------------------
+
+* Added the new MovieClip `Timeline` API for powering custom MovieClip frames and behaviors
+* Added `shaderFilter.invalidate()` to force redraw of a filter if necessary
+* Migrated OpenFL sources to a new package structure for better collaboration
+* Migrated SWF support to an external library (using the new `Timeline` API)
+* Improved `sprite.addChild` to reduce recursion and improve performance
+* Improved the OpenGL implementation of glow, blur and drop shadow shaders
+* Improved the behavior of `VideoTexture` upload and `TEXTURE_READY` events
+* Improved double-click behavior on `TextField` to select a whole word
+* Improved cancel behavior for `FocusEvent.KEY_FOCUS_CHANGE`
+* Improved `sprite.buttonMode`+`focusRect` to dispatch `MouseEvent.CLICK` on space/up/enter
+* Improved the automatic tab focus order for display objects
+* Improved support for tab focus order on HTML5
+* Fixed event dispatch from `NetStream` objects
+* Fixed `touchEvent.isPrimaryTouchPoint` behavior for touch end, tap and cancel
+* Fixed TextField rendering on Haxe 4 to use UTF-16 on platforms that need it
+* Fixed support for AGAL highp precision
+* Fixed additional drawn line in some `Graphics` commands
+* Fixed _sans, _serif and _typewriter fonts for macOS Catalina
+* Fixed the pixel rounding behavior for `Graphics` to be consistent with other objects
+* Fixed setting `scrollV`/`scrollH` on `TextField` before dispatching `Event.SCROLL`
+* Fixed `Std.is()` deprecation warnings using Haxe 4.2
+* Fixed dispatch of `TextEvent.TEXT_INPUT` on DOM `TextField`
+
+
+8.9.7 (06/20/2020)
+------------------
+
+* Updated to allow Lime 7.9.*
+* Fixed compiler error using Haxe 4.1 and HTML5
+* Fixed compiler warnings using Haxe 4.1 and HTML5
+
+
+8.9.6 (01/27/2020)
+------------------
+
+* Update to allow Lime 7.7.*
+* Reverted `TextField`, filter and renderer changes made in 8.9.2 through 8.9.5
+* Suspended these improvements until the next major release
+* Forced NPM versions of the library to use WebGL 1
+* Improved SWFLite libraries to use a UUID and have a more reliable root value
+* Improved the behavior of `textField.mouseWheelEnabled`
+* Improved the behavior of `context3D.totalGPUMemory`
+* Improved `NetStream` to allow HTML5 MediaStream instead of a URL
+* Fixed an issue where `MovieClip` would behave like a button when `buttonMode` was disabled
+* Fixed a possible crash issue with multi-line text selection
+* Fixed `textField.setTextFormat` when the `TextFormat` object has null values
+* Fixed some missing methods in `openfl.utils.AssetManifest` for parity with Lime
+* Fixed `soundTransform.volume` when playing HTML5 video
+* Fixed support for `event.preventDefault` on `MOUSE_WHEEL` events
+* Fixed texture flush for AGAL shaders that do not have an alpha texture
+* Fixed key modifier values for mouse events when coming back to the window
+
+
+8.9.5 (09/11/2019)
+------------------
+
+* Fixed support for both 32- and 64-bit Neko on Windows (for Haxe 3 and 4)
+* Fixed rendering position of SWF-based `TextField` instances with filters
+* Fixed rendering of updated `TextField` instances when using filters
+* Fixed instances where incorrect blend modes were applied in Cairo rendering
+* Fixed workaround for `compareMethods` on HL target within `EventDispatcher`
+
+
+8.9.4 (09/05/2019)
+------------------
+
+* Reverted UTF character changes to investigate a different fix
+* Fixed support for 64-bit Neko on Windows (included in Haxe 4 RC 4)
+* Fixed a possible issue when using `@:bitmap` assets on HTML5
+
+
+8.9.3 (09/04/2019)
+------------------
+
+* Updated for Haxe 4 RC 4
+* Improved the quality of `scale9Grid` rendering in hardware
+* Improved support for rendering UTF character sets with `TextField`
+* Fixed a type error when running on C++ platforms
+* Fixed incorrect scale value when using `openfl.geom.Transform`
+* Fixed support for array-based form parameters when making HTTP requests
+* Fixed use of an incompatible OpenGL call when using the Electron target
+* Fixed reference to objects that could prevent GC in event pool behavior
+* Fixed the value for the `ClipboardFormats.TEXT_FORMAT` type
+
+
+8.9.2 (08/20/2019)
+------------------
+
+* Updated to Lime 7.6.*
+* Improved `GlowFilter` with hardware shaders for inner and knockout glow
+* Improved the memory used when using hardware filters
+* Improved support for margins, `indent`, and `blockIndent` in `TextField`
+* Improved AGAL item count in converted shaders
+* Improved the performance of `TextField` when translating position
+* Improved `BitmapData.fromTexture` to support `Texture` and `RectangleTexture`
+* Improved the performance of `Tilemap` with multiple child containers
+* Improved the hardware implementation of `DropShadowFilter`
+* Improved performance of `bitmapData.copyPixels` on HTML5 using `alphaBitmapData`
+* Improved rendering when using HTML5 -Ddom
+* Fixed `scrollRect` rendering behavior
+* Fixed a possible runtime error when using `VideoTexture`
+* Fixed parsing issues when using `textField.htmlText`
+* Fixed issues when selecting multiple lines of text in a `TextField`
+* Fixed text styles following new-line breaks
+* Fixed a parsing issue for AGAL conversion when referencing an indirect register
+* Fixed dispatching of roll out and touch out events in some cases
+* Fixed the behavior of alpha PNG and 8-bit lossless exports from SWF files
+* Fixed culling when using `graphics.drawTriangles`
+* Fixed issues where `Loader` did not fully unload previously loaded content
+* Fixed `Loader` to properly disallow access to `DisplayObjectContainer` APIs
+* Fixed multiple cases in `SimpleButton` where state was not changed properly
+
+
+8.9.1 (05/14/2019)
+------------------
+
+* Updated to Lime 7.4.*
+* Added initial support for custom base classes from SWF resources
+* Improved `Video` to allow cross-origin requests when targeting HTML5
+* Improved support for indexed PNG images generated from SWF resources
+* Improved the scroll behavior in input `TextField` instances
+* Fixed a layout issue when combing `wordWrap` and `autoSize` in `TextField`
+* Fixed a possible crash when initializing `SWFLite` instances
+* Fixed a possible infinite loop issue in `TextField`
+* Fixed the behavior of `textFormat.url` when the `url` is unset
+
+
+8.9.0 (04/01/2019)
+------------------
+
+* Updated support for Haxe 4 dev versions
+* Updated to Lime 7.3.*
+* Added `ByteArray` `fromArrayBuffer`, `loadFromBytes` and `loadFromFile` for NPM
+* Added `openfl.events.EventType` abstract for strictly typed event listener support
+* Added initial support for `scale9Grid` from SWF assets and Cairo and canvas renderers
+* Added initial support for `fileReference.browse` and `fileReference.load` on HTML5
+* Added `openfl.utils.clearTimeout` on NPM releases
+* Improved HTML5 `SharedObject` to save based on the URL path not the server name or protocol
+* Improved performance of SWFLite when searching for exported class names and applying alpha
+* Improved behavior of generated AS3 externs (for use with Apache Royale)
+* Improved edge map calculation when exporting SWF shapes
+* Improved `cacheAsBitmap` to respect `scrollRect` bounds (if present)
+* Improved `ByteArray.readObject` with AMF to return the actual object decoded
+* Moved internal code style to use the Haxe "formatter" library for consistency
+* Fixed incorrect rendering when calling `graphics.drawTriangles` multiple times
+* Fixed the behavior of `matrix3D.deltaTransformVector` to ignore translation
+* Fixed the SWFLite exporter on NPM releases so that JPEG processing is properly supported
+* Fixed the logic when switching between batches within `Tilemap` on render
+* Fixed support for `byteArray.compress` when targeting Flash
+* Fixed support for `dictionary.each()` when targeting Flash
+* Fixed an issue with the calculation in `tileset.hasRect`
+* Fixed the bounds calculation for `graphics.drawQuads`
+* Fixed handling of `byteArray.position` in `sound.loadCompressedDataFromByteArray`
+* Fixed support for the `samples` parameter in `sound.loadPCMFromByteArray`
+* Fixed handling of `byteArray.position` in `sound.loadPCMFromByteArray`
+* Fixed the constructor of `openfl.Vector` in some cases for NPM releases
+* Fixed an issue where incorrect text layout could cause an infinite loop
+* Fixed an issue where the wrong texture was used when re-using custom shaders
+* Fixed an issue in SWF conversion where PNG data was written with the wrong compression
+* Fixed issues with cache invalidation when setting `bitmap.width` and `height`
+* Fixed issues with processing class names in SWFLite exporter
+
+
+8.8.0 (01/07/2019)
+------------------
+
+* Added `ByteArray.defaultEndian` property
+* Updated canvas `TextField` renderer to use text baseline for more consistent rendering
+* Updated the types for `KeyboardEvent` on Flash to improve support for `switch` cases
+* Improved `UncaughtErrorEvents` handler to not run on debug by default
+* Initial support for mouse wheel support in `TextField` scrolling
+* Disabled some incorrect HTML5 canvas renderer blend modes
+* Fixed the behavior of `ByteArray.defaultObjectEncoding`
+* Fixed a possible infinite loop when applying word wrap to narrow `TextField` instances
+* Fixed a regression in marking `scrollRect` changes as dirty
+* Fixed a regression in HTML5 DOM rendering when objects are removed from the stage
+* Fixed dirty object calculation for `removeChild` in some renderers
+* Fixed issues in SWF processing to improve NPM/Haxelib release compatibility
+* Fixed `Loader` to dispatch an error if `Loader.loadBytes` returns a null `BitmapData`
+* Fixed some issues with multi-format `TextField` line breaking
+* Fixed some minor issues for users trying to use OpenFL with unsupported Haxe versions
+* Fixed some issues with `Graphics` objects being dirty when using `cacheAsBitmap`
+* Fixed missing `Event.CONTEXT3D_CREATE` event if `requestContext3D` is called again
+* Fixed support for using AMF0/AMF3 object formats in NPM `ByteArray`
+* Fixed the behavior of `MovieClip` with `buttonMode` but with `enabled` false
+* Fixed some issues when setting the `CubeTexture` sampler state
+* Fixed support for disabling the context menu on browsers that show on mouse down
+* Fixed unnecessary Lime version warning when running `openfl create`
+* Fixed a case where `Stage3D` could render when the context had not been cleared
+* Fixed `Sound.getLength` for sounds streamed from OGG Vorbis audio files
+
+
+8.7.0 (12/04/2018)
+------------------
+
+* Updated to Lime 7.2.*
+* Added `stage.fullScreenSourceRect` support
+* Added initial `tile.getBounds` and `tile.hitTestTile` APIs
+* Added support for using `<tab>` to set focus (`tabIndex`, `tabChildren` etc)
+* Improved several internal APIs for better memory and performance
+* Improved the quality of `DropShadowFilter` and `GlowFilter`
+* Improved `DisplacementMapFilter` to support software rendering
+* Improved support for Haxe 4 preview 5
+* Improved the behavior of `simpleButton.enabled` and `simpleButton.mouseEnabled`
+* Improved the behavior of `movieClip.buttonMode`
+* Improved the behavior of `MouseEvent.RELEASE_OUTSIDE`
+* Improved the quality of `bitmapData.perlinNoise`
+* Improved the rendering of `cacheAsBitmap` objects with alpha
+* Improved the GL renderer to respect `StageQuality.LOW` to disable smoothing
+* Improved the standard index.html template for cases when the window is transparent
+* Improved rendering in `TextField` with underlined text
+* Improved handling of HTML5 text when we know the font ascent/descent at compile-time
+* Improved `MovieClip` framescript timing and reliability
+* Improved SWF class generation with additional properties and more reliability
+* Fixed setting transforms for `cacheAsBitmap` objects
+* Fixed an internal issue when pooling `ColorTransform` that could fail in recursion
+* Fixed the `TextFormat` extern types to not have an extra field
+* Fixed texture upload for HTML5 video when video was not ready yet
+* Fixed a regression when performing the letterboxing logic on non-resizable windows
+* Fixed an issue where fonts on native targets had the wrong baseline
+* Fixed incorrect handling of transforms for same frames in SWF timeline animations
+
+
+8.6.4 (10/19/2018)
+------------------
+
+* Improved ES module imports at top-level by making all types available
+
+
+8.6.3 (10/19/2018)
+------------------
+
+* Set Lime to use a hard-coded version (unless -Ddisable-version-check)
+* Improved updating of `Stage3D` `VideoTexture` when video is seeking
+* Fixed cache invalidation in `Bitmap` when using `filters`
+* Fixed how `Context3D` scissoring was handled in non-shared `Stage3D` context
+* Fixed some issues with software `GlowFilter` and `DropShadowFilter`
+
+
+8.6.2 (10/15/2018)
+------------------
+
+* Fixed an issue when using custom WebGL rendering in NPM version
+* Fixed an issue in NPM samples that do not size the stage immediately
+
+
+8.6.1 (10/15/2018)
+------------------
+
+* Fixed use of `VideoTexture` with cube geometry
+* Fixed a regression in the behavior of `scrollRect`
+* Fixed an issue where the bottom of some HTML5 text could be cut off
+* Fixed issues when applying `DropShadowFilter` to `TextField` in software
+
+
+8.6.0 (10/12/2018)
+------------------
+
+* Added initial support for `PixelSnapping` in hardware rendering
+* Added initial support for `DisplacementMapFilter` (hardware only)
+* Added `generate="true"` support for SWF `BitmapData` symbols
+* Improved `BitmapData.fromFile` (and similar methods) when an image fails to load
+* Improved texture smoothing behavior for hardware shader filters
+* Improved synchronization between display list shaders and `Stage3D` shader programs
+* Fixed a regression where `TextField` could fail to render on hardware
+* Fixed a regression in the behavior of `textField.getTextFormat` with default parameters
+* Fixed the clip rectangle for `sprite.scrollRect` on hardware rendering
+* Fixed `stage.color` to return a 32-bit value
+* Fixed `Context3D` scissoring with a width or height of 0
+* Fixed an issue where `scrollRect` could show a pixel improperly
+* Fixed issues when compiling using `-Dtelemetry`
+* Fixed a Haxe 4 compiler deprecation warning
+
+
+8.5.1 (09/27/2018)
+-----------------
+
+* Improved handling of context loss if context is not restored by the next frame
+* Fixed a regression in indexed hardware `graphics.drawTriangles` rendering
+* Fixed minor compile errors when using some optional defines
+
+
+8.5.0 (09/26/2018)
+------------------
+
+* Migrated OpenGL rendering internally to use `Stage3D` instead of calling GL directly
+* Added support for multiple `Stage3D` instances (initially 2 on mobile, 4 on desktop)
+* Added OpenGL state caching in `Context3D` (unless `-Dopenfl-disable-context-cache`)
+* Added `Context3DProgramFormat`, with initial support for GLSL shaders in `Context3D`
+* Added `stage.context3D`, present when hardware acceleration is enabled
+* Added pressure values to `TouchEvent`
+* Added `application.meta.version` to the default application template
+* Added `PerspectiveMatrix3D` to `openfl.utils`
+* Removed prefixes on `imageSmoothingEnabled` internally to remove HTML5 warnings
+* Removed types deprecated since OpenFL 8.0
+* Improved performance in `drawQuads` and `Tilemap` when using a hardware renderer
+* Improved shaders to use `highp` float values when available
+* Improved each `Stage3D` to use its own buffers (unless `-Dopenfl-share-context`)
+* Improved `Font.registerFont` to allow registering font instances in addition to classes
+* Improved HTML5 font rendering to use font ascender/descender values if present
+* Fixed a regression in `TextField` clipping when using `scrollX`
+* Fixed support for OpenGL-based video on HTML5
+* Fixed many issues related to `Stage3D` state conflicts with the display list renderer
+* Fixed compilation issues in Haxe 4 development builds
+* Fixed an issue where hardware `cacheAsBitmap` could result in blank textures
+* Fixed dispatch of `MOUSE_MOVE` event before dispatching `MOUSE_LEAVE`
+* Fixed a regression in setting `displayObject.alpha` when changing its `colorTransform`
+* Fixed a regression in the visibility of the mouse cursor when using `Mouse.hide`
+* Fixed a regression in setting `event.target` on events dispatched from the display list
+
+
 8.4.1 (08/13/2018)
 ------------------
 
@@ -719,7 +1161,7 @@
 * Improved Capabilities to more closely approximate Flash's behavior
 * Improved the density of projects targeting HTML5 with high DPI
 * Fixed a regression in the calculation of textField.textWidth
-* Fixed ExternalInterface.available to return false on native 
+* Fixed ExternalInterface.available to return false on native
 * Fixed the visibility of hit-testing on HTML5
 
 
@@ -734,7 +1176,7 @@
 
 * Improved stage ACTIVATE/DEACTIVATE to be more consistent with Flash
 * Improved code completion on the Flash target when using FlashDevelop
-* Improved the code output size when targeting HTML5 
+* Improved the code output size when targeting HTML5
 * Fixed hiding of stack trace when errors occur in a custom preloader
 * Fixed possible cases where stage.x/y and other transforms could be changed
 * Fixed support for scale and letterboxing on native targets
@@ -791,7 +1233,7 @@
 * Fixed a regression in displaying stack traces on crash errors
 * Fixed text measurement on IE 11
 * Fixed return value when scaleX or scaleY is negative
-* Fixed issues where `new ByteArray` may have values other than zero 
+* Fixed issues where `new ByteArray` may have values other than zero
 * Fixed an issue with SWFLite assets when using the "generate" option
 * Fixed a possible null crash when updating object transforms
 * Fixed support for garbage collecting Sound when SoundChannel is finished
@@ -1195,7 +1637,7 @@
 * Fixed a null rect issue in OpenGL graphics drawTiles
 * Fixed access to System.totalMemory on HTML5
 * Fixed reference for default Noto Android font
-* Minor fixes for better scrollRect support 
+* Minor fixes for better scrollRect support
 
 
 3.3.9 (10/15/2015)
@@ -1368,14 +1810,14 @@
 
 * Improved the accuracy of bitmapData.threshold
 * Minor improvements to Cairo rendering
-* Fixed an issue where Bitmap objects could stop scaling 
+* Fixed an issue where Bitmap objects could stop scaling
 * Fixed possible infinite event dispatch loop
 
 
 3.2.1 (07/22/2015)
 ------------------
 
-* Updated OpenGLView.isSupported to report false in single canvas mode 
+* Updated OpenGLView.isSupported to report false in single canvas mode
 * Fixed a memory leak when using _sans, _serif and _typewriter fonts
 * Fixed possible black texture issue on some platforms
 * Fixed regression in bitmapData.draw
@@ -1469,7 +1911,7 @@
 * Improved add/remove event listener behavior when dispatching
 * Improved bounds check for bezier curves
 * Improved the behavior of mouse event buttonDown
-* Initial re-implementation of URLLoader for native 
+* Initial re-implementation of URLLoader for native
 * Added handling for Lime application.frameRate
 * Fixed SystemPath (legacy)
 

@@ -23,6 +23,20 @@ ImportAll
 
 --next
 
+-xml xml/AIR.xml
+-cpp obj/docs
+-D display
+-D air_doc_gen
+-D flash_doc_gen
+-D openfl_doc_gen
+-D doc_gen
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
 -xml xml/Windows.xml
 -cpp obj/docs
 -D display
@@ -119,4 +133,4 @@ ImportAll
 
 --next
 
--cmd haxelib run dox -o ../docs-api -i xml -in openfl --title "API Reference" -D website "http://www.openfl.org" -D source-path "https://github.com/openfl/openfl/tree/develop/src/" -D logo "/images/logo.png" -D textColor 0x777777 -theme ../assets/docs-theme --toplevel-package openfl
+-cmd haxelib run dox -o ../docs -i xml -in openfl --title "API Reference" -D website "http://www.openfl.org" -D source-path "https://github.com/openfl/openfl/tree/develop/src/" -D textColor 0x777777 -theme ../assets/docs-theme --toplevel-package openfl
